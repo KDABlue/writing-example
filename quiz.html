@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Anna</title>
+    <style>
+        body {
+            font-family: 'Helvetica', sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #setup-container, #quiz-container {
+            display: block;
+        }
+        #quiz-container {
+            display: none;
+        }
+        #question {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        button {
+            font-size: 14px;
+            padding: 10px;
+            margin: 5px;
+        }
+        progress {
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="setup-container">
+    <h1>Quiz Anna</h1>
+    <label for="numQuestions">Di quante domande vuoi che sia il test?</label>
+    <input type="number" id="numQuestions" min="1">
+    <button onclick="startQuiz()">Inizia il Quiz</button>
+</div>
+
+<div id="quiz-container">
+    <h1>Quiz Anna</h1>
+    <progress id="progressBar" max="100" value="0"></progress>
+    <div id="question"></div>
+    <button onclick="checkAnswer(true)">Vero</button>
+    <button onclick="checkAnswer(false)">Falso</button>
+</div>
+
+<script>
+    const allQuestions = [
+    ["All'interno di un'azienda, uno dei principali obiettivi della FSI consiste nell'applicazione delle tecnologie informatiche ad alcuni processi aziendali che, grazie allo sviluppo e all’implementazione dei sistemi informativi automatizzati, possono essere resi più efficienti ed efficaci", "Vero"],
+    ["Grazie ad algoritmi molto complessi, le applicazioni di data mining, molto utili ins occasione di una query ad hoc, sono in grado di analizzare enormi quantità di dati e di identificare modelli, schemi logici e relazioni predittive non definibili a priori", "Vero"],
+    ["130. Questo 193.205.62.96 è un indirizzo IP?", "Vero"],
+    ["Il CPA introdotto per soddisfare le richieste degli inserzionisti è uno dei più recenti modelli di pricing per il digital advertising?", "Vero"],
+    ["Il software applicativo interagisce con quello di sistema?", "Vero"]
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function startQuiz() {
+        const numQuestions = document.getElementById('numQuestions').value;
+        if (numQuestions < 1 || numQuestions > allQuestions.length) {
+            alert(`Inserisci un numero valido di domande (da 1 a ${allQuestions.length}).`);
+            return;
+        }
+
+        document.getElementById('setup-container').style.display = 'none';
+        document.getElementById('quiz-container').style.display = 'block';
+
+        const shuffledQuestions = shuffleArray(allQuestions);
+        const selectedQuestions = shuffledQuestions.slice(0, numQuestions);
+
+        currentQuestion = 0;
+        score = 0;
+
+        allQuestions.length = 0;  // Clear the original array
+        allQuestions.push(...selectedQuestions);  // Use selected questions
+
+        displayQuestion();
+        updateProgressBar();
+    }
+
+    function shuffleArray(array) {
+        const shuffledArray = array.slice();
+        for (let i = shuffledArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+        }
+        return shuffledArray;
+    }
+
+    function displayQuestion() {
+        const questionElement = document.getElementById('question');
+        questionElement.textContent = allQuestions[currentQuestion][0];
+    }
+
+    function checkAnswer(userAnswer) {
+        const [, correctAnswer] = allQuestions[currentQuestion];
+
+        if (userAnswer === (correctAnswer === "Vero")) {
+            score++;
+            alert(`Corretto!\n\nDomanda: ${allQuestions[currentQuestion][0]}\nLa tua risposta: Vero\nRisposta corretta: ${correctAnswer}`);
+        } else {
+            alert(`Sbagliato!\n\nDomanda: ${allQuestions[currentQuestion][0]}\nLa tua risposta: Falso\nRisposta corretta: ${correctAnswer}`);
+        }
+
+        currentQuestion++;
+
+        if (currentQuestion < allQuestions.length) {
+            displayQuestion();
+            updateProgressBar();
+        } else {
+            alert(`Quiz Finito\nIl tuo score finale: ${score}/${allQuestions.length}\nOvvero il: ${(score / allQuestions.length) * 100}%`);
+            document.getElementById('quiz-container').innerHTML = "<h2>Quiz Finito</h2><p>Il tuo score finale: " + score + "/" + allQuestions.length + "<br>Ovvero il: " + ((score / allQuestions.length) * 100).toFixed(2) + "%</p>";
+        }
+    }
+
+    function updateProgressBar() {
+        const progressBar = document.getElementById('progressBar');
+        progressBar.value = (currentQuestion / allQuestions.length) * 100;
+    }
+</script>
+
+</body>
+</html>
