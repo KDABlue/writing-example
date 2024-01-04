@@ -272,11 +272,11 @@
     function checkAnswer(userAnswer) {
         const [, correctAnswer] = allQuestions[currentQuestion];
 
-        if (userAnswer === (correctAnswer === "Vero")) {
+        if (userAnswer === correctAnswer) {
             score++;
-            alert(`Corretto!\n\nDomanda: ${allQuestions[currentQuestion][0]}\nLa tua risposta: Vero\nRisposta corretta: ${correctAnswer}`);
+            alert(`Corretto!\n\nDomanda: ${allQuestions[currentQuestion][0]}\nLa tua risposta: ${userAnswer}\nRisposta corretta: ${correctAnswer}`);
         } else {
-            alert(`Sbagliato!\n\nDomanda: ${allQuestions[currentQuestion][0]}\nLa tua risposta: Falso\nRisposta corretta: ${correctAnswer}`);
+            alert(`Sbagliato!\n\nDomanda: ${allQuestions[currentQuestion][0]}\nLa tua risposta: ${userAnswer}\nRisposta corretta: ${correctAnswer}`);
         }
 
         currentQuestion++;
