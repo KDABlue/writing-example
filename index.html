@@ -272,11 +272,12 @@
     function checkAnswer(userAnswer) {
         const [, correctAnswer] = allQuestions[currentQuestion];
 
-        if (userAnswer === correctAnswer) {
+        const translatedUserAnswer = userAnswer ? "Vero" : "Falso";
+        if (translatedUserAnswer === correctAnswer) {
             score++;
-            alert(`Corretto!\n\nDomanda: ${allQuestions[currentQuestion][0]}\nLa tua risposta: ${userAnswer}\nRisposta corretta: ${correctAnswer}`);
+            alert(`Corretto!\n\nDomanda: ${allQuestions[currentQuestion][0]}\nLa tua risposta: ${translatedUserAnswer}\nRisposta corretta: ${correctAnswer}`);
         } else {
-            alert(`Sbagliato!\n\nDomanda: ${allQuestions[currentQuestion][0]}\nLa tua risposta: ${userAnswer}\nRisposta corretta: ${correctAnswer}`);
+            alert(`Sbagliato!\n\nDomanda: ${allQuestions[currentQuestion][0]}\nLa tua risposta: ${translatedUserAnswer}\nRisposta corretta: ${correctAnswer}`);
         }
 
         currentQuestion++;
