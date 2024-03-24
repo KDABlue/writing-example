@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Animation</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+  }
+  .container {
+    display: none;
+  }
+  @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .message {
+    font-size: 24px;
+    color: red;
+    font-style: italic;
+    animation: fadein 3s forwards;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="message">I love you</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var container = document.querySelector('.container');
+  container.style.display = 'block';
+});
+</script>
+</body>
+</html>
