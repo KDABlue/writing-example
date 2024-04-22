@@ -14,8 +14,8 @@
             display: none;
         }
         .object-image {
-            max-width: 80%;
-            height: auto;
+            width: 200px; /* Adjust size as needed */
+            height: 200px; /* Adjust size as needed */
             display: block;
             margin: 0 auto;
         }
@@ -45,11 +45,11 @@
 <body>
     <h1>Progressive Objects</h1>
     <div class="image-container" id="building">
-        <img src="building.jpeg" alt="Palazzo" class="object-image">
+        <img src="building.png" alt="Palazzo" class="object-image">
         <p>A Building</p>
     </div>
     <div class="image-container" id="house">
-        <img src="house.jpg" alt="Casa" class="object-image">
+        <img src="house.png" alt="Casa" class="object-image">
         <p>A House</p>
     </div>
     <div class="image-container" id="diverse_objects">
@@ -57,12 +57,12 @@
         <p>Diverse Objects</p>
     </div>
     <div class="image-container" id="diverse_objects">
-      <img src="cell.jpg" alt="Cellula" class="object-image">
-      <p>Diverse Objects</p>
+        <img src="cell.png" alt="Cellula" class="object-image">
+        <p>Diverse Objects</p>
     </div>
     <div class="image-container" id="diverse_objects">
-      <img src="atom.jpg" alt="Atomo" class="object-image">
-      <p>Diverse Objects</p>
+        <img src="atom.png" alt="Atomo" class="object-image">
+        <p>Diverse Objects</p>
     </div>
     <div class="image-container" id="potato">
         <img src="kitty.png" alt="Potata" class="object-image">
@@ -94,6 +94,11 @@
         // Show the first image when the page loads
         images[currentIndex].style.display = 'block';
         updateProgress(); // Initially update progress bar
+
+        document.getElementById('nextBtn').addEventListener('click', showNextImage);
+    </script>
+</body>
+</html>
 
         document.getElementById('nextBtn').addEventListener('click', showNextImage);
     </script>
